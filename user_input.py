@@ -11,4 +11,5 @@ def get_tags_from_user_input(tag_class):
         tag = input('Enter the tag you are searching for: ')
         if tag not in tags:
             tags.append(tag_class+tag)
+    print(tags)
     return tags
