@@ -1,7 +1,9 @@
 ---
 start-url: https://stackoverflow.com/
-path: questions
+path: questions?tab=newest&page=
 posts-class-name: .s-post-summary
+post_title_class: s-post-summary--content-title
+post_text_excerpt_class: s-post-summary--content-excerpt
 votes-class-name: .s-post-summary--stats-item-number
 tags-class-name: .post-tag
 single-tag-class-name: .js-tagname-
