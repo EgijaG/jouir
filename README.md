@@ -6,5 +6,5 @@ Evening project for playing around with:
 - Databases
 
 ## Configuration
-The code allows for configuration, if there are any changes in class items or tags on stackoverflow page.
+The code allows for configuration, if there are any changes in class items or tags on StackOverFlow page.
 Since no secrets are provided in config file, config.yaml is uploaded to git for local usage.
