@@ -1,6 +1,5 @@
 # read config file, so every changing value could be changed outside code
 import sys
-import time
 
 import yaml
 from web_requests import get_newest_post_with_vote
@@ -38,9 +37,11 @@ def get_post(provided_tags):
 # ask the user for tags they want to see / read tags from config file
 tags = get_tags_from_user_input(config_data['single-tag-class-name'])
 print("Got the tags from user -> ", tags)
-result = get_post(tags)
-print("Final post ->", result)
-sys.exit(0)
+
 # create a database connection (outside this file do all DB things - table, db, rights, connection etc.)
 
 # save the newest post, that has at least 1 vote
+result = get_post(tags)
+print("Final post ->", result.__str__())
+posts = {result.title: result.excerpt}
+sys.exit(0)
