@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 
 # make a request with 1 min timeout
+# TODO see if refactoring would be possible, with pulling out some functionality
 def get_newest_post_with_vote(url, path, posts_class, votes_class, provided_tags, post_excerpt_class, post_title_class):
     print("found my url", url + path)
     switch_to_next_page: bool = True
@@ -19,6 +20,7 @@ def get_newest_post_with_vote(url, path, posts_class, votes_class, provided_tags
             soup = BeautifulSoup(response.text, 'html.parser')
             posts = soup.select(posts_class)
             # need to fix it to only get ones with at least one vote
+            print(len(posts), " -------------------------- the size of posts list")
             for post in posts:
                 print(" post and tag ", provided_tags)
                 vote_count = post.select_one(votes_class)
@@ -33,15 +35,17 @@ def get_newest_post_with_vote(url, path, posts_class, votes_class, provided_tags
                         post_with_tag = post.select_one(tag)
                         if post_with_tag:
                             print("found the post that has corresponding tag and at least one vote")
-                            # TODO need to figure out how to get title and text from post
-                            result_set[post.select_one(post_title_class).text] = (post.select_one(post_excerpt_class)
-                                                                                  .text)
-                            switch_to_next_page = False
+                            title = post.select(post_title_class)[0].text
+                            print(title, " -------- post title")
+                            excerpt = post.select(post_excerpt_class)[0].text
+                            print(excerpt, " -------- post text")
+                            if title and excerpt:
+                                result_set[title] = excerpt
+                                switch_to_next_page = False
         if len(result_set) < 1:
             print("No posts with those tags that meet the criteria found on this page. Let's check the next "
                   "page...")
             page_number += 1
             time.sleep(60)
             print("page number - ", page_number)
-
     return result_set

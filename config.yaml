@@ -2,8 +2,8 @@
 start-url: https://stackoverflow.com/
 path: questions?tab=newest&page=
 posts-class-name: .s-post-summary
-post_title_class: s-post-summary--content-title
-post_text_excerpt_class: s-post-summary--content-excerpt
+post_title_class: h3[class*="s-post-summary--content-title"] > a
+post_text_excerpt_class: div[class*="s-post-summary--content-excerpt"]
 votes-class-name: .s-post-summary--stats-item-number
 tags-class-name: .post-tag
 single-tag-class-name: .js-tagname-

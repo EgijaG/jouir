@@ -22,8 +22,7 @@ config_data = read_config()
 
 # Find web request library
 def get_post(provided_tags):
-    print('Hello from getting single post or multiple')
-
+    print('Hello from getting newest post with at least one vote')
     newest_post = get_newest_post_with_vote(config_data['start-url'], config_data['path'],
                                             config_data['posts-class-name'],
                                             config_data['votes-class-name'],
@@ -39,7 +38,8 @@ def get_post(provided_tags):
 # ask the user for tags they want to see / read tags from config file
 tags = get_tags_from_user_input(config_data['single-tag-class-name'])
 print("Got the tags from user -> ", tags)
-print("Final post ->", get_post(tags))
+result = get_post(tags)
+print("Final post ->", result)
 sys.exit(0)
 # create a database connection (outside this file do all DB things - table, db, rights, connection etc.)
 
