@@ -9,6 +9,8 @@ def get_tags_from_user_input(tag_class):
             print('Enter a valid integer!')
     while len(tags) < max_length:
         tag = input('Enter the tag you are searching for: ')
+        # TODO more checks, or transformations, because if you write tag - c++ - the + characters will fail the whole
+        #  execution
         if tag not in tags:
             tags.append(tag_class+tag)
     print(tags)

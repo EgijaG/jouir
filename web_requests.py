@@ -1,4 +1,3 @@
-import sys
 import time
 
 import requests
@@ -35,14 +34,15 @@ def get_newest_post_with_vote(url, path, posts_class, votes_class, provided_tags
                         print(tag, "found the single tag")
                         post_with_tag = post.select_one(tag)
                         if post_with_tag:
-                            # TODO implement class for posts
                             print("found the post that has corresponding tag and at least one vote")
                             title = post.select(post_title_class)[0].text
                             print(title, " -------- post title")
                             excerpt = post.select(post_excerpt_class)[0].text
                             print(excerpt, " -------- post text")
+                            post_url = url[:-1] + post.find('a').attrs['href']
+                            print(post_url, " -------- post link")
                             if title and excerpt:
-                                p.set_values(title, excerpt, '')
+                                p.set_values(title, excerpt, '', post_url)
                                 switch_to_next_page = False
         if not p.title:
             print("No posts with those tags that meet the criteria found on this page. Let's check the next "
