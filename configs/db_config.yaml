@@ -2,3 +2,5 @@
 host:
 user:
 pass:
+database:
+...

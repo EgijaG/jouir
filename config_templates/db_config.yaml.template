@@ -2,4 +2,5 @@
 host: somestring
 user: somestring
 pass: somestring
----
+database: somestring
+...

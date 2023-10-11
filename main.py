@@ -1,10 +1,10 @@
 # read config file, so every changing value could be changed outside code
 import sys
 import yaml
+
+from database import set_credentials, connect_to_mysql, insert_data
 from web_requests import get_newest_post_with_vote
 from user_input import get_tags_from_user_input
-
-# from database import connect_to_mysql, execute_sql_file
 
 
 def read_config(file):
@@ -43,7 +43,6 @@ def get_post(provided_tags):
 tags = get_tags_from_user_input(config_data["single-tag-class-name"])
 print("Got the tags from user -> ", tags)
 
-# create a database connection (outside this file do all DB things - table, db, rights, connection etc.)
 
 # save the newest post, that has at least 1 vote
 result = get_post(tags)
@@ -53,6 +52,12 @@ posts = {result.title: result.excerpt}
 # save posts to database
 # reading db config
 db_config = read_config("configs/db_config.yaml")
-# connect_to_mysql(db_config["host"], db_config["user"], db_config["pass"])
-# execute_sql_file("sql/create_db.sql")
+set_credentials(
+    db_config["host"], db_config["user"], db_config["pass"], db_config["database"]
+)
+# create a database connection (outside this file do all DB things - table, db, rights, connection etc.)
+cursor = connect_to_mysql()
+# insert data into DB
+# TODO figure out what to do with the cursor & optimize to get the data to db
+insert_data(connect_to_mysql(), result)
 sys.exit(0)
